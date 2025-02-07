@@ -42,4 +42,9 @@ class QuestionRepository
     {
         return $question->delete();
     }
+
+    public function getRandom()
+    {
+        return Question::inRandomOrder()->first();
+    }
 }

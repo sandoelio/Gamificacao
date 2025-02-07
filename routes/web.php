@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\GameController;
 
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('form.entrar');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -15,3 +16,6 @@ Route::post('/questions', [QuestionController::class, 'store'])->name('questions
 Route::get('/questions/{id}/edit', [QuestionController::class, 'edit'])->name('questions.edit');
 Route::put('/questions/{id}', [QuestionController::class, 'update'])->name('questions.update');
 Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
+
+Route::get('/game', [GameController::class, 'index'])->name('game.index');
+Route::post('/game/answer', [GameController::class, 'submitAnswer'])->name('game.submitAnswer');

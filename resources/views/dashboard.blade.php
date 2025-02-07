@@ -39,7 +39,7 @@
 
             <h1>Bem-vindo</h1> <h2>{{ $user->name}}</h2>
             <a href="{{ route('logout') }}">Sair</a>
-            
+
         </div>
 
     </body>

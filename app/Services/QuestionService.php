@@ -41,5 +41,10 @@ class QuestionService
         return $this->questionRepository->update($id, $data);
     }
 
+    public function getRandomQuestion()
+    {
+        return $this->questionRepository->getRandom();
+    }
+
 }
 
