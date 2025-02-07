@@ -13,6 +13,7 @@ class CreateQuestionsTable extends Migration
             $table->text('question_text'); // Pergunta enigmática
             $table->text('answer_correct'); // Resposta correta
             $table->integer('points')->default(0); // Pontuação associada
+            $table->longText('image')->nullable(); // Campo para armazenar a imagem em Base64
             $table->timestamps();
         });
     }
