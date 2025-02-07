@@ -15,6 +15,11 @@ class QuestionService
         $this->questionRepository = $questionRepository;
     }
 
+    public function getAllQuestionsPaginated($perPage = 5)
+    {
+        return $this->questionRepository->getAllQuestionsPaginated($perPage);
+    }
+
     public function createQuestion(array $data)
     {
         if (isset($data['image']) && $data['image']->isValid()) {

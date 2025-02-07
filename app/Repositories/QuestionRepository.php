@@ -51,4 +51,10 @@ class QuestionRepository
                   ->where('user_id', $userId);
         })->inRandomOrder()->first();
     }
+
+    public function getAllQuestionsPaginated($perPage = 5)
+    {
+        return \App\Models\Question::paginate($perPage);
+    }
+
 }
