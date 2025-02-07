@@ -43,8 +43,12 @@ class QuestionRepository
         return $question->delete();
     }
 
-    public function getRandom()
+    public function getRandomForUser($userId)
     {
-        return Question::inRandomOrder()->first();
+        return Question::whereNotIn('id', function ($query) use ($userId) {
+            $query->select('question_id')
+                  ->from('answers')
+                  ->where('user_id', $userId);
+        })->inRandomOrder()->first();
     }
 }

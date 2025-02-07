@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\QuestionRepository;
+use App\Models\Answer;
 
 class QuestionService
 {
@@ -41,9 +42,14 @@ class QuestionService
         return $this->questionRepository->update($id, $data);
     }
 
-    public function getRandomQuestion()
+    // Retorna uma pergunta aleatória para o usuário, se ele já não tiver respondido 15 perguntas
+    public function getRandomQuestionForUser($userId)
     {
-        return $this->questionRepository->getRandom();
+        $answeredCount = Answer::where('user_id', $userId)->count();
+        if ($answeredCount >= 15) {
+            return null;
+        }
+        return $this->questionRepository->getRandomForUser($userId);
     }
 
 }

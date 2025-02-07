@@ -19,3 +19,4 @@ Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('
 
 Route::get('/game', [GameController::class, 'index'])->name('game.index');
 Route::post('/game/answer', [GameController::class, 'submitAnswer'])->name('game.submitAnswer');
+Route::get('/game/over', [GameController::class, 'gameOver'])->name('game.gameover');
