@@ -16,7 +16,7 @@ class QuestionController extends Controller {
 
     public function index() {
 
-        $questions = $this->questionService->getAllQuestions();
+        $questions = $this->questionService->getAllQuestionsPaginated(5);
         return view('questions.index', compact('questions'));
     }
 
