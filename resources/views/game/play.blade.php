@@ -54,7 +54,7 @@
         if (timeLeft <= 0) {
             clearInterval(countdown);
             // Redireciona para a página de Game Over com os pontos atualizados
-            window.location.href = "{{ route('game.gameover') }}";
+            window.location.href = "{{ route('game.over') }}";
         } else {
             timerElement.innerHTML = timeLeft;
         }

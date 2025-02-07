@@ -19,26 +19,40 @@ class GameController extends Controller
     }
 
     // Exibe uma pergunta aleatória para o usuário com um timer
-    public function index()
-    {
-        if (!session()->has('usuario_id')) {
-            return redirect()->route('form.entrar');
+   
+        public function index()
+        {
+            // Verifica se o usuário está logado
+            if (!session()->has('usuario_id')) {
+                return redirect()->route('form.entrar');
+            }
+        
+            $user = User::find(session('usuario_id'));
+        
+            if (!$user) {
+                return redirect()->route('form.entrar')->with('error', 'Usuário não encontrado.');
+            }
+        
+            // Verifica quantas perguntas o usuário já respondeu
+            $answeredCount = $user->answers()->count(); 
+        
+            if ($answeredCount >= 15) {
+                return redirect()->route('game.over'); // Se já respondeu 15 perguntas, vai para Game Over
+            }
+        
+            // Obtém uma pergunta aleatória que o usuário ainda não respondeu
+            $question = $this->questionService->getRandomQuestion($user->id);
+             // Recupera o usuário
+            $user = \App\Models\User::find(session('usuario_id'));
+            $currentScore = $user ? $user->points : 0;
+        
+            if (!$question) {
+                return redirect()->route('game.over')->with('error', 'Não há mais perguntas disponíveis.');
+            }
+        
+            return view('game.play', compact('question', 'user', 'currentScore'));
         }
-        $user = User::find(session('usuario_id'));
-        if (!$user) {
-            return redirect()->route('form.entrar')->with('error', 'Usuário não encontrado.');
-        }
-        $currentScore = $user->points;
-
-        // Busca uma pergunta aleatória que o usuário ainda não respondeu
-        $question = $this->questionService->getRandomQuestionForUser($user->id);
-        if (!$question) {
-            // Se o usuário já respondeu 15 perguntas, exibe a tela de Game Over
-            return view('game.gameover', compact('currentScore'));
-        }
-
-        return view('game.play', compact('question', 'currentScore'));
-    }
+        
 
     // Processa a resposta do usuário
     public function submitAnswer(Request $request)
@@ -72,5 +86,21 @@ class GameController extends Controller
 
         return view('game.gameover', compact('currentScore'));
     }
+
+    public function dashboard()
+    {
+        if (!session()->has('usuario_id')) {
+            return redirect()->route('form.entrar');
+        }
+
+        // Obtém o usuário logado
+        $user = User::find(session('usuario_id'));
+
+        // Obtém os 10 melhores jogadores ordenados pela pontuação (ranking)
+        $ranking = User::orderByDesc('points')->limit(10)->get();
+
+        return view('game.dashboard', compact('user', 'ranking'));
+    }
+
 
 }

@@ -35,4 +35,10 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+
 }

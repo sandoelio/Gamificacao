@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\QuestionRepository;
 use App\Models\Answer;
+use App\Models\Question;
 
 class QuestionService
 {
@@ -51,6 +52,16 @@ class QuestionService
         }
         return $this->questionRepository->getRandomForUser($userId);
     }
+
+    public function getRandomQuestion($userId)
+{
+    // Obtém IDs das perguntas que o usuário já respondeu
+    $answeredQuestions = \App\Models\Answer::where('user_id', $userId)->pluck('question_id')->toArray();
+
+    // Seleciona uma nova pergunta que o usuário ainda não respondeu
+    return Question::whereNotIn('id', $answeredQuestions)->inRandomOrder()->first();
+}
+
 
 }
 

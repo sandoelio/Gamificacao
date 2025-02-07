@@ -30,7 +30,7 @@ class AuthController extends Controller
         $user = $this->userService->authenticateUser($validated['email'], $validated['name']);
 
         // Redireciona para o dashboard
-        return redirect()->route('dashboard');
+        return redirect()->route('game.dashboard');
     }
 
     public function dashboard()
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         $user = $this->userService->getUserById(Session::get('usuario_id'));
 
-        return view('dashboard', compact('user'));
+        return view('game.dashboard', compact('user'));
     }
 
     public function logout()

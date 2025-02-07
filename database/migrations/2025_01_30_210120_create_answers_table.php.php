@@ -10,7 +10,7 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users'); // Relacionamento com a tabela de users
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');; // Relacionamento com a tabela de users
             $table->foreignId('question_id')->constrained('questions'); // Relacionamento com a tabela de questions
             $table->text('response'); // Resposta dada pelo usuário
             $table->boolean('is_correct')->default(false); // Se a resposta foi correta ou não

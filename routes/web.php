@@ -7,7 +7,6 @@ use App\Http\Controllers\GameController;
 
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('form.entrar');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
@@ -19,4 +18,5 @@ Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('
 
 Route::get('/game', [GameController::class, 'index'])->name('game.index');
 Route::post('/game/answer', [GameController::class, 'submitAnswer'])->name('game.submitAnswer');
-Route::get('/game/over', [GameController::class, 'gameOver'])->name('game.gameover');
+Route::get('/game-over', [GameController::class, 'gameOver'])->name('game.over');
+Route::get('/dashboard', [GameController::class, 'dashboard'])->name('game.dashboard');
