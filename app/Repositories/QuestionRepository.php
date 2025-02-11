@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Question;
+use App\Models\Answer;
 
 class QuestionRepository
 {
@@ -55,6 +56,15 @@ class QuestionRepository
     public function getAllQuestionsPaginated($perPage = 5)
     {
         return \App\Models\Question::paginate($perPage);
+    }
+
+    public function getRandomQuestionForUser(int $userId)
+    {
+        // Obtém os IDs das perguntas já respondidas pelo usuário
+        $answeredIds = Answer::where('user_id', $userId)->pluck('question_id')->toArray();
+
+        // Retorna uma pergunta aleatória que não esteja na lista de respondidas
+        return Question::whereNotIn('id', $answeredIds)->inRandomOrder()->first();
     }
 
 }

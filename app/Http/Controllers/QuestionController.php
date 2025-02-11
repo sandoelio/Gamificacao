@@ -70,5 +70,14 @@ class QuestionController extends Controller {
         return redirect()->route('questions.index')->with('success', 'Pergunta deletada com sucesso!');
     }
 
+    public function getRandomQuestion($userId)
+    {
+        // Obtém os IDs das perguntas já respondidas pelo usuário
+        $answeredIds = \App\Models\Answer::where('user_id', $userId)->pluck('question_id')->toArray();
+
+        // Retorna uma pergunta aleatória que não esteja na lista de respondidas
+        return \App\Models\Question::whereNotIn('id', $answeredIds)->inRandomOrder()->first();
+    }
+
 }
 

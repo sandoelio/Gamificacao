@@ -54,4 +54,10 @@ class GameService
 
         return $isCorrect;
     }
+
+    public function hasUserCompletedGame(int $userId): bool
+    {
+        $answeredCount = Answer::where('user_id', $userId)->count();
+        return $answeredCount >= 15;
+    }
 }

@@ -19,40 +19,36 @@ class GameController extends Controller
     }
 
     // Exibe uma pergunta aleatória para o usuário com um timer
-   
-        public function index()
-        {
-            // Verifica se o usuário está logado
-            if (!session()->has('usuario_id')) {
-                return redirect()->route('form.entrar');
-            }
-        
-            $user = User::find(session('usuario_id'));
-        
-            if (!$user) {
-                return redirect()->route('form.entrar')->with('error', 'Usuário não encontrado.');
-            }
-        
-            // Verifica quantas perguntas o usuário já respondeu
-            $answeredCount = $user->answers()->count(); 
-        
-            if ($answeredCount >= 15) {
-                return redirect()->route('game.over'); // Se já respondeu 15 perguntas, vai para Game Over
-            }
-        
-            // Obtém uma pergunta aleatória que o usuário ainda não respondeu
-            $question = $this->questionService->getRandomQuestion($user->id);
-             // Recupera o usuário
-            $user = \App\Models\User::find(session('usuario_id'));
-            $currentScore = $user ? $user->points : 0;
-        
-            if (!$question) {
-                return redirect()->route('game.over')->with('error', 'Não há mais perguntas disponíveis.');
-            }
-        
-            return view('game.play', compact('question', 'user', 'currentScore'));
+    public function index()
+    {
+        // Verifica se o usuário está logado
+        if (!session()->has('usuario_id')) {
+            return redirect()->route('form.entrar');
+        }
+
+        $userId = session('usuario_id');
+
+        // Se o usuário já respondeu 15 perguntas, redireciona para Game Over
+        if ($this->gameService->hasUserCompletedGame($userId)) {
+            return redirect()->route('game.over')->with('message', 'Você já respondeu 15 perguntas!');
+        }
+
+        // Busca o usuário
+        $user = User::find($userId);
+        if (!$user) {
+            return redirect()->route('form.entrar')->with('error', 'Usuário não encontrado.');
         }
         
+        // Obtém uma pergunta aleatória que o usuário ainda não respondeu
+        $question = $this->questionService->getRandomQuestionForUser($user->id);
+        if (!$question) {
+            return redirect()->route('game.over')->with('error', 'Não há mais perguntas disponíveis.');
+        }
+        
+        $currentScore = $user->points;
+
+        return view('game.play', compact('question', 'user', 'currentScore'));
+    }
 
     // Processa a resposta do usuário
     public function submitAnswer(Request $request)
@@ -70,18 +66,18 @@ class GameController extends Controller
         $message = $isCorrect 
             ? "Resposta correta! Pontuação atualizada." 
             : "Resposta errada! Pontuação atualizada.";
+
         return redirect()->route('game.index')->with('success', $message);
     }
 
     public function gameOver()
     {
-        // Verifica se o usuário está logado (armazenado na sessão)
+        // Verifica se o usuário está logado
         if (!session()->has('usuario_id')) {
             return redirect()->route('form.entrar');
         }
 
-        // Recupera o usuário
-        $user = \App\Models\User::find(session('usuario_id'));
+        $user = User::find(session('usuario_id'));
         $currentScore = $user ? $user->points : 0;
 
         return view('game.gameover', compact('currentScore'));
@@ -93,7 +89,6 @@ class GameController extends Controller
             return redirect()->route('form.entrar');
         }
 
-        // Obtém o usuário logado
         $user = User::find(session('usuario_id'));
 
         // Obtém os 10 melhores jogadores ordenados pela pontuação (ranking)
@@ -101,6 +96,4 @@ class GameController extends Controller
 
         return view('game.dashboard', compact('user', 'ranking'));
     }
-
-
 }

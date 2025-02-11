@@ -51,11 +51,7 @@ class QuestionService
     // Retorna uma pergunta aleatória para o usuário, se ele já não tiver respondido 15 perguntas
     public function getRandomQuestionForUser($userId)
     {
-        $answeredCount = Answer::where('user_id', $userId)->count();
-        if ($answeredCount >= 15) {
-            return null;
-        }
-        return $this->questionRepository->getRandomForUser($userId);
+        return $this->questionRepository->getRandomQuestionForUser($userId);
     }
 
     public function getRandomQuestion($userId)
