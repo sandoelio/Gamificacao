@@ -96,4 +96,17 @@ class GameController extends Controller
 
         return view('game.dashboard', compact('user', 'ranking'));
     }
+
+     // quando o tempo acaba, aplica penalidade e mostra a tela de "Tempo Esgotado"
+     public function timeUp()
+     {
+         if (!session()->has('usuario_id')) {
+             return redirect()->route('form.entrar');
+         }
+         $userId = session('usuario_id');
+         $this->gameService->applyTimePenalty($userId, 6);
+         $user = User::find($userId);
+         $currentScore = $user ? $user->points : 0;
+         return view('game.timeup', compact('currentScore'));
+     }
 }

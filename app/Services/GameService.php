@@ -60,4 +60,22 @@ class GameService
         $answeredCount = Answer::where('user_id', $userId)->count();
         return $answeredCount >= 15;
     }
+
+    /**
+     * Aplica uma penalidade de pontos quando o tempo acaba.
+     *
+     * @param int $userId
+     * @param int $penalty (padrão: 6 pontos)
+     * @return \App\Models\User|null
+     */
+    public function applyTimePenalty(int $userId, int $penalty = 6)
+    {
+        $user = User::find($userId);
+        if ($user) {
+            $user->points -= $penalty;
+            $user->save();
+            return $user;
+        }
+        return null;
+    }
 }

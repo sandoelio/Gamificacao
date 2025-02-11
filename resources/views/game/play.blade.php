@@ -44,21 +44,19 @@
 </div>
 
 <script>
-    // Timer de 30 segundos
-    let timeLeft = 30;
-    let timerElement = document.getElementById("timer");
-    let answerInput = document.getElementById("user_answer");
-    let submitButton = document.getElementById("submitBtn");
+    let timeLeft = 30; // Tempo do cronômetro
+    const timerElement = document.getElementById('timer');
 
-    let countdown = setInterval(function() {
+    function updateTimer() {
         if (timeLeft <= 0) {
-            clearInterval(countdown);
-            // Redireciona para a página de Game Over com os pontos atualizados
-            window.location.href = "{{ route('game.over') }}";
+            window.location.href = "{!! route('game.timeup') !!}"; // Redireciona para a view de tempo esgotado
         } else {
-            timerElement.innerHTML = timeLeft;
+            timerElement.innerText = timeLeft;
+            timeLeft--;
+            setTimeout(updateTimer, 1000);
         }
-        timeLeft--;
-    }, 1000);
+    }
+    updateTimer();
 </script>
+
 @endsection

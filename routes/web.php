@@ -20,3 +20,4 @@ Route::get('/game', [GameController::class, 'index'])->name('game.index');
 Route::post('/game/answer', [GameController::class, 'submitAnswer'])->name('game.submitAnswer');
 Route::get('/game-over', [GameController::class, 'gameOver'])->name('game.over');
 Route::get('/dashboard', [GameController::class, 'dashboard'])->name('game.dashboard');
+Route::get('/game/timeup', [GameController::class, 'timeUp'])->name('game.timeup');
