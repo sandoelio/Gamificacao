@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Services\QuestionService;
 use App\Services\GameService;
 use App\Models\User;
-use App\Services\UserService; 
+use App\Services\UserService;
+use App\Models\Answer;
+
 
 class GameController extends Controller
 {
@@ -109,16 +111,33 @@ class GameController extends Controller
         return view('game.dashboard', compact('user', 'ranking'));
     }
 
-     // quando o tempo acaba, aplica penalidade e mostra a tela de "Tempo Esgotado"
-     public function timeUp()
-     {
-         if (!session()->has('usuario_id')) {
-             return redirect()->route('form.entrar');
-         }
-         $userId = session('usuario_id');
-         $this->gameService->applyTimePenalty($userId, 6);
-         $user = User::find($userId);
-         $currentScore = $user ? $user->points : 0;
-         return view('game.timeup', compact('currentScore'));
-     }
+    public function timeUp()
+    {
+        if (!session()->has('usuario_id')) {
+            return redirect()->route('form.entrar');
+        }
+    
+        $userId = session('usuario_id');
+    
+        // Buscar a última pergunta do usuário antes do tempo expirar
+        $lastAnswer = Answer::where('user_id', $userId)
+                            ->latest('created_at') // Pega a última resposta registrada
+                            ->first();
+    
+        $questionId = $lastAnswer ? $lastAnswer->question_id : null;
+    
+        if (!$questionId) {
+            return redirect()->route('game.index')->with('error', 'Nenhuma pergunta encontrada para aplicar penalidade.');
+        }
+    
+        // Aplica a penalidade
+        $this->gameService->applyTimePenalty($userId, $questionId);
+    
+        $user = User::find($userId);
+        $currentScore = $user ? $user->points : 0;
+    
+        return view('game.timeup', compact('currentScore'));
+    }
+    
+     
 }

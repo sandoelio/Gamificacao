@@ -47,8 +47,12 @@ class User extends Authenticatable
 
     public function answers()
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(\App\Models\Answer::class);
     }
 
+    public function penalties()
+    {
+        return $this->hasMany(\App\Models\Penalty::class);
+    }
 
 }

@@ -8,4 +8,12 @@ class Question extends Model
 {
     protected $fillable = ['question_text', 'answer_correct', 'points', 'image'];
 
+    
+    public function question()
+    {
+        return $this->belongsTo(\App\Models\Question::class);
+    }
+
 }
+
+

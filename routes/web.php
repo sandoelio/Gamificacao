@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\GameController;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', [AuthController::class, 'showLoginForm'])->name('form.entrar');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -18,6 +19,8 @@ Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function
     Route::get('/questions/{id}/edit', [QuestionController::class, 'edit'])->name('questions.edit');
     Route::put('/questions/{id}', [QuestionController::class, 'update'])->name('questions.update');
     Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
+
+    Route::get('/report', [ReportController::class, 'index'])->name('report.index');
 });
 
 Route::get('/game', [GameController::class, 'index'])->name('game.index');

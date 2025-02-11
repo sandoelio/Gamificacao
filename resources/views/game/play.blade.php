@@ -49,7 +49,7 @@
 
     function updateTimer() {
         if (timeLeft <= 0) {
-            window.location.href = "{!! route('game.timeup') !!}"; // Redireciona para a view de tempo esgotado
+            window.location.href = "{!! route('game.timeup') !!}"; // Redireciona para a rota que aplica a penalidade
         } else {
             timerElement.innerText = timeLeft;
             timeLeft--;
@@ -58,5 +58,6 @@
     }
     updateTimer();
 </script>
+
 
 @endsection

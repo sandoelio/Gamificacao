@@ -6,6 +6,8 @@ use App\Models\Question;
 use App\Models\User;
 use App\Models\Answer;
 use Illuminate\Support\Facades\DB;
+use App\Models\Penalty;
+
 
 class GameService
 {
@@ -61,21 +63,24 @@ class GameService
         return $answeredCount >= 15;
     }
 
-    /**
-     * Aplica uma penalidade de pontos quando o tempo acaba.
-     *
-     * @param int $userId
-     * @param int $penalty (padrão: 6 pontos)
-     * @return \App\Models\User|null
-     */
-    public function applyTimePenalty(int $userId, int $penalty = 6)
+    public function applyTimePenalty(int $userId, int $questionId, int $penalty = 6)
     {
-        $user = User::find($userId);
-        if ($user) {
-            $user->points -= $penalty;
-            $user->save();
-            return $user;
-        }
-        return null;
+        return DB::transaction(function () use ($userId, $questionId, $penalty) {
+            $user = User::find($userId);
+
+            if ($user) {
+                $user->points -= $penalty;
+                $user->save();
+
+                // Registra a penalidade associada à pergunta
+                Penalty::create([
+                    'user_id' => $userId,
+                    'question_id' => $questionId, // Aqui salvamos a pergunta que expirou
+                    'penalty_points' => $penalty,
+                    'reason' => 'Tempo expirado',
+                ]);
+            }
+        });
     }
+
 }
