@@ -33,4 +33,15 @@ class UserService
     {
         return $this->userRepository->findById($id);
     }
+
+    /**
+     * Retorna o ranking dos usuários (não administradores).
+     *
+     * @param int $limit
+     * @return \Illuminate\Database\Eloquent\Collection
+    */
+    public function getRanking(int $limit = 10)
+    {
+        return $this->userRepository->getRanking($limit);
+    }
 }

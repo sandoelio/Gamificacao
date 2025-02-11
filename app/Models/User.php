@@ -19,11 +19,21 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'is_admin',
         'email_verified_at',
         'created_at',
         'updated_at',
         'points',
         'remember_token',
+    ];
+
+
+    /**
+     * Os atributos que devem ser convertidos para tipos nativos.
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean', // garante que is_admin seja booleano
     ];
 
     /**

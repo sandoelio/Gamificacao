@@ -40,6 +40,9 @@
             <br>
             <br>
             <a href="{{ route('game.dashboard') }}" class="btn btn-secondary w-100">Cancelar</a>
+            <br>
+            <br>
+            <a href="{{ route('logout') }}" class="btn btn-danger w-100">Sair</a>
         </form>
       </div>
     </div>

@@ -13,11 +13,10 @@ class QuestionController extends Controller {
 
         $this->questionService = $questionService;
     }
-
+   
     public function index() {
 
-        $questions = $this->questionService->getAllQuestionsPaginated(5);
-        return view('questions.index', compact('questions'));
+     $questions = $this->questionService->getAllQuestionsPaginated(5);return view('questions.index', compact('questions'));
     }
 
     public function store(Request $request) {

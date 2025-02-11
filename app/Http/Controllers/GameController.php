@@ -6,16 +6,19 @@ use Illuminate\Http\Request;
 use App\Services\QuestionService;
 use App\Services\GameService;
 use App\Models\User;
+use App\Services\UserService; 
 
 class GameController extends Controller
 {
     protected $questionService;
     protected $gameService;
+    protected $userService;
 
-    public function __construct(QuestionService $questionService, GameService $gameService)
+    public function __construct(QuestionService $questionService, GameService $gameService, UserService $userService)
     {
         $this->questionService = $questionService;
         $this->gameService = $gameService;
+        $this->userService = $userService;
     }
 
     // Exibe uma pergunta aleatória para o usuário com um timer
@@ -91,8 +94,17 @@ class GameController extends Controller
 
         $user = User::find(session('usuario_id'));
 
-        // Obtém os 10 melhores jogadores ordenados pela pontuação (ranking)
-        $ranking = User::orderByDesc('points')->limit(10)->get();
+        if (!$user) {
+            return redirect()->route('form.entrar')->with('error', 'Usuário não encontrado.');
+        }
+   
+        // Se o usuário for administrador, redireciona para a área administrativa (gerenciamento de questões)
+        if ($user->is_admin) {
+            return redirect()->route('questions.index');
+        }
+        
+        // Usa o UserService para obter o ranking dos 10 melhores (excluindo administradores)
+        $ranking = $this->userService->getRanking(10);
 
         return view('game.dashboard', compact('user', 'ranking'));
     }
