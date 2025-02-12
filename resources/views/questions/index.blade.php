@@ -59,7 +59,8 @@
 
       <div class="card-body">
         @if($questions->count() > 0)
-          <table class="table table-bordered text-center align-middle">
+        <div class="table-responsive"> <!-- Torna a tabela responsiva -->
+          <table class="table table-bordered table-striped">
             <thead class="table-dark">
               <tr>
                 <th style="width: 5%;">ID</th>
@@ -102,7 +103,7 @@
               @endforeach
             </tbody>
           </table>
-
+        </div>
           <!-- Paginação -->
           <div class="d-flex justify-content-center">
             {{ $questions->links('vendor.pagination.custom') }}
@@ -117,6 +118,7 @@
 @endsection
 
 <style>
+    
     .short-text {
         white-space: nowrap;
         overflow: hidden;
@@ -132,6 +134,11 @@
         width: 200px; /* Largura máxima */
         text-align: center; /* Centraliza o texto */
     }
+    .table-responsive {
+      overflow-x: auto; /* Permite rolagem horizontal */
+      width: 100%;
+    }
+
 </style>
 
 <script>

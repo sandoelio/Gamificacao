@@ -22,26 +22,39 @@
       /* Estilização da navbar para que fique dentro do container */
       .custom-navbar {
         background-color: #343a40;
-        padding: 10px 20px;
+        padding: 10px;
         border-radius: 5px;
+        display: flex;
+        justify-content: center; /* Centraliza o conteúdo */   
       }
       .custom-navbar .navbar-brand {
         color: #fff;
         font-size: 1.5rem;
         font-weight: bold;
+        display: flex;
+        flex-direction: column; /* Coloca a imagem acima do texto */
+        align-items: center; /* Centraliza horizontalmente */
+        text-align: center; /* Centraliza o texto */
       }
       /* Ajustes para botões de ação na listagem */
       .action-buttons {
         display: flex;
         gap: 50px;
       }
+      .img-thumbnail1 {    
+        max-width:150px; 
+        height:auto;
+        display: block;
+      }
+
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-dark">
-      <div class="container main-container custom-navbar">
-        <a class="navbar-brand" href="{{ route('questions.index') }}">
-          <span>🏀</span> Gamificação com Perguntas
+    <nav class="navbar navbar-dark custom-navbar">
+      <div class="container d-flex flex-column align-items-center">
+        <a class="navbar-brand" href="{{ route('game.dashboard') }}">
+          <img src="{{ asset('imagens/slogan2.png') }}" alt="Imagem" class="img-thumbnail1">
+           Gamificação com Perguntas
         </a>
       </div>
     </nav>
