@@ -30,6 +30,7 @@ O sistema apresenta aos usuários uma série de perguntas com pontuação associ
 - **TailwindCSS** - Estilos adicionais  
 - **Tinker** - Para testes no banco de dados  
 - **Migrations e Seeders** - Gerenciamento do banco  
+- **Docker** - Ambiente de desenvolvimento
 
 ---
 ## 📌 Funcionalidades Principais
@@ -140,6 +141,41 @@ O projeto segue o padrão MVC (Model–View–Controller) com camadas adicionais
 ```
     php artisan serve
 ```
+## Ou utilizando o Docker:
+
+   * Criar o arquivo .env com as configurações do banco de dados
+    ```
+        cp .env.example .env
+    ```
+    ⚠️ Importante: Configure o .env com as credenciais do banco de dados e não esqueça de usar o DB_HOST dessa maneira.
+
+    ```
+        DB_HOST=mysql
+    ```
+
+    * Rodar o comando:
+    ```
+        docker-compose up -d
+    ```
+    * Acesse o container:
+    ```
+        docker exec -it gamificacao_app_1 bash
+    ```
+    * Gere a chave da aplicação:
+    ```
+        php artisan key:generate
+    ```
+    * Rode as migrations:
+    ```
+        php artisan migrate
+    ```
+    * Crie um usuário administrador:
+    ```
+        php artisan tinker
+        >>> \App\Models\User::create([
+                'name' => 'Admin',
+                'email' => '
+    ```
 
 ---
 
