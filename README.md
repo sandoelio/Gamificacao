@@ -170,13 +170,19 @@ O projeto segue o padrão MVC (Model–View–Controller) com camadas adicionais
         php artisan migrate
     ```
     * Crie um usuário administrador:
+    
     ```
         php artisan tinker
         >>> \App\Models\User::create([
                 'name' => 'Admin',
                 'email' => '
     ```
+    * OU Inserindo no banco
 
+    ```
+        INSERT INTO users (name, email, is_admin, created_at, updated_at)
+        VALUES ('Admin', 'admin@example.com', 1, NOW(), NOW());
+    ```
 ---
 
 🎮 Como Funciona?
