@@ -19,7 +19,7 @@
             <!-- Exibição da Pergunta -->
             <div class="card shadow-lg p-3 mb-4 bg-white rounded">
                 <div class="card-body">
-                    <h3 class="card-title">{{ $question->question_text }}</h3>
+                    <h3 class="card-title" style="text-align:left">{!! nl2br(e($question->question_text)) !!}</h3>
                     @if ($question->image)
                         <div class="text-center my-3">
                             <img src="data:image/png;base64,{{ $question->image }}" alt="Imagem da pergunta" class="img-fluid" style="max-width:300px;">

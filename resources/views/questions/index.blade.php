@@ -78,7 +78,7 @@
                       <span class="short-text text-center d-block mx-auto">{{ Str::limit($question->question_text, 50) }}</span>
                       @if(strlen($question->question_text) > 50)
                           <button class="btn btn-link btn-sm text-primary toggle-text">Ver mais</button>
-                          <span class="full-text d-none text-center d-block mx-auto">{{ $question->question_text }}</span>
+                          <span class="full-text d-none d-block mx-auto">{!! nl2br(e($question->question_text)) !!}</span>
                       @endif
                   </td>
                   <td>{{ $question->points }}</td>
@@ -132,7 +132,7 @@
         white-space: normal; /* Permite quebra de linha */
         word-break: break-all; /* Permite quebra de palavras longas */
         width: 200px; /* Largura máxima */
-        text-align: center; /* Centraliza o texto */
+        /* text-align: center; Centraliza o texto */
     }
     .table-responsive {
       overflow-x: auto; /* Permite rolagem horizontal */
