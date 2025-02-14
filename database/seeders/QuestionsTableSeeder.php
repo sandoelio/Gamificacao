@@ -298,6 +298,46 @@ class QuestionsTableSeeder extends Seeder
                 'image' => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+            ],
+            [
+                'question_text' => "Em uma partida de basquete o que significa essa sinalização do arbitro?\nA) Falta técnica\nB) Dois Pontos\nC) Falta de ataque\nD) Dois Lances",
+                'answer_correct' => 'D',
+                'points' => 20,
+                'image' =>  base64_encode(file_get_contents(base_path('database/seeders/imagens/1.png'))),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'question_text' => "Em uma partida de basquete o que significa essa sinalização do arbitro?\nA) 11\nB) Um Lance\nC) Falta de ataque\nD) Dois Lances",
+                'answer_correct' => 'A',
+                'points' => 20,
+                'image' =>  base64_encode(file_get_contents(base_path('database/seeders/imagens/2.png'))),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'question_text' => "Em uma partida de basquete o que significa essa sinalização do arbitro?\nA) Falta técnica\nB) Carregou\nC) Dois Dribles\nD) Andou",
+                'answer_correct' => 'C',
+                'points' => 20,
+                'image' =>  base64_encode(file_get_contents(base_path('database/seeders/imagens/3.png'))),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'question_text' => "Qual o fundamento básico do basquete na cruzada?",
+                'answer_correct' => 'Arremesso',
+                'points' => 20,
+                'image' =>  base64_encode(file_get_contents(base_path('database/seeders/imagens/4.png'))),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'question_text' => "Quais as medidas oficiais da quadra de basquete?",
+                'answer_correct' => '28x15',
+                'points' => 20,
+                'image' =>  base64_encode(file_get_contents(base_path('database/seeders/imagens/quadra.png'))),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
             ]
 
         ]);
