@@ -179,11 +179,6 @@ php artisan db:seed
 
 * Verificar o usuário administrador no banco:
 
-* OU Inserindo no banco
-```
-INSERT INTO users (name, email, is_admin, created_at, updated_at)
-VALUES ('Admin', 'admin@example.com', 1, NOW(), NOW());
-```
 ---
 
 🎮 Como Funciona?
