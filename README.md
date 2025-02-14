@@ -125,6 +125,10 @@ O projeto segue o padrão MVC (Model–View–Controller) com camadas adicionais
 ```
     php artisan migrate
 ```
+⚠️ Importante: Rode as seeders
+    ```
+        php artisan db:seed
+    ```
 
 6️⃣ Crie um usuário administrador: Utilize o Tinker:
 ```
@@ -157,26 +161,35 @@ O projeto segue o padrão MVC (Model–View–Controller) com camadas adicionais
     ```
         docker-compose up -d
     ```
+
     * Acesse o container:
     ```
         docker exec -it gamificacao_app_1 bash
     ```
+
     * Gere a chave da aplicação:
     ```
         php artisan key:generate
     ```
+
     * Rode as migrations:
     ```
         php artisan migrate
     ```
-    * Crie um usuário administrador:
-    
+
+    * Rode as seeders
+    ```
+        php artisan db:seed
+    ```
+
+    * Crie um usuário administrador:   
     ```
         php artisan tinker
         >>> \App\Models\User::create([
                 'name' => 'Admin',
                 'email' => '
     ```
+
     * OU Inserindo no banco
 
     ```
