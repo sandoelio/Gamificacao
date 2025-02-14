@@ -147,55 +147,55 @@ O projeto segue o padrão MVC (Model–View–Controller) com camadas adicionais
 ```
 ## Ou utilizando o Docker:
 
-   * Criar o arquivo .env com as configurações do banco de dados
-    ```
-        cp .env.example .env
-    ```
-    ⚠️ Importante: Configure o .env com as credenciais do banco de dados e não esqueça de usar o DB_HOST dessa maneira.
+* Criar o arquivo .env com as configurações do banco de dados
+```
+cp .env.example .env
+```
 
-    ```
-        DB_HOST=mysql
-    ```
+⚠️ Importante: Configure o .env com as credenciais do banco de dados e não esqueça de usar o DB_HOST dessa maneira.
 
-    * Rodar o comando:
-    ```
-        docker-compose up -d
-    ```
+```
+DB_HOST=mysql
+```
 
-    * Acesse o container:
-    ```
-        docker exec -it gamificacao_app_1 bash
-    ```
+* Rodar o comando:
+```
+docker-compose up -d
+```
 
-    * Gere a chave da aplicação:
-    ```
-        php artisan key:generate
-    ```
+* Acesse o container:
+```
+docker exec -it gamificacao_app_1 bash
+```
 
-    * Rode as migrations:
-    ```
-        php artisan migrate
-    ```
+* Gere a chave da aplicação:
+```
+php artisan key:generate
+```
 
-    * Rode as seeders
-    ```
-        php artisan db:seed
-    ```
+* Rode as migrations:
+```
+php artisan migrate
+```
 
-    * Crie um usuário administrador:   
-    ```
-        php artisan tinker
-        >>> \App\Models\User::create([
-                'name' => 'Admin',
-                'email' => '
-    ```
+* Rode as seeders
+```
+php artisan db:seed
+```
 
-    * OU Inserindo no banco
+* Crie um usuário administrador:   
+```
+php artisan tinker
+>>> \App\Models\User::create([
+'name' => 'Admin',
+'email' => '
+```
 
-    ```
-        INSERT INTO users (name, email, is_admin, created_at, updated_at)
-        VALUES ('Admin', 'admin@example.com', 1, NOW(), NOW());
-    ```
+* OU Inserindo no banco
+```
+INSERT INTO users (name, email, is_admin, created_at, updated_at)
+VALUES ('Admin', 'admin@example.com', 1, NOW(), NOW());
+```
 ---
 
 🎮 Como Funciona?
