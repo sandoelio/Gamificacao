@@ -119,27 +119,21 @@ O projeto segue o padrão MVC (Model–View–Controller) com camadas adicionais
 ```
     php artisan key:generate
 ```
+
 ⚠️ Importante: Configure o .env com as credenciais do banco de dados.
+
 
 5️⃣ Criar o banco de dados e rodar as migrations:
 ```
     php artisan migrate
 ```
-⚠️ Importante: Rode as seeders
-    ```
-        php artisan db:seed
-    ```
 
-6️⃣ Crie um usuário administrador: Utilize o Tinker:
+6️⃣ Importante: Rode as seeders
 ```
-    php artisan tinker
-    >>> \App\Models\User::create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => bcrypt('admin123'),
-            'is_admin' => true,
-        ]);
+    php artisan db:seed
 ```
+
+7️⃣ Verificar o usuário administrador no banco:
 
 📌 Rodar o servidor local:
 ```
@@ -183,13 +177,7 @@ php artisan migrate
 php artisan db:seed
 ```
 
-* Crie um usuário administrador:   
-```
-php artisan tinker
->>> \App\Models\User::create([
-'name' => 'Admin',
-'email' => '
-```
+* Verificar o usuário administrador no banco:
 
 * OU Inserindo no banco
 ```
