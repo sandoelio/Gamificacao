@@ -31,6 +31,8 @@ O sistema apresenta aos usuários uma série de perguntas com pontuação associ
 - **Tinker** - Para testes no banco de dados  
 - **Migrations e Seeders** - Gerenciamento do banco  
 - **Docker** - Ambiente de desenvolvimento
+- **PHPUnit** - Testes unitários
+- **Mockery** - Mocks para testes
 
 ---
 ## 📌 Funcionalidades Principais
