@@ -19,6 +19,12 @@ class QuestionController extends Controller {
      $questions = $this->questionService->getAllQuestionsPaginated(5);return view('questions.index', compact('questions'));
     }
 
+    public function perguntasCadastradas(){
+
+        $questions = $this->questionService->getAllQuestionsPaginated(5);return view('questions.questionsCadastradas', compact('questions'));
+
+    }
+
     public function store(Request $request) {
 
         $request->validate([

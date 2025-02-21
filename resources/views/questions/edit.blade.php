@@ -36,7 +36,7 @@
         @endif
 
         <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-        <a href="{{ route('questions.index') }}" class="btn btn-secondary">Cancelar</a>
+        <a href="{{ route('questions.cadastradas') }}" class="btn btn-secondary">Voltar</a>
     </form>
 </div>
 @endsection

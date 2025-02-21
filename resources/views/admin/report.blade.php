@@ -93,7 +93,7 @@
 
 <!-- Botão de voltar -->
 <div class="container mt-3 mb-4 text-center">
-    <a href="{{ route('questions.index') }}" class="btn btn-secondary px-5 py-2">🔙 Voltar</a>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-danger px-5 py-2">🔙 Voltar</a>
 </div>
 
 {{-- CSS Personalizado --}}

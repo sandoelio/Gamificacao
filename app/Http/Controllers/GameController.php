@@ -102,7 +102,7 @@ class GameController extends Controller
    
         // Se o usuário for administrador, redireciona para a área administrativa (gerenciamento de questões)
         if ($user->is_admin) {
-            return redirect()->route('questions.index');
+            return redirect()->route('admin.dashboard');
         }
         
         // Usa o UserService para obter o ranking dos 10 melhores (excluindo administradores)
