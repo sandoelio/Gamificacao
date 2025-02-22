@@ -52,7 +52,7 @@ class QuestionController extends Controller {
             'question_text'  => 'required',
             'answer_correct' => 'required',
             'points'         => 'required|integer',
-            'image'          => 'nullable|image|max:2048',
+            'image'          => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         // Se houver nova imagem, converte para Base64
@@ -60,19 +60,15 @@ class QuestionController extends Controller {
             $data['image'] = base64_encode(file_get_contents($request->file('image')->getRealPath()));
         }
         $this->questionService->updateQuestion($id, $data);
-        return redirect()->route('questions.index')->with('success', 'Pergunta atualizada com sucesso!');
+        return redirect()->route('questions.cadastradas')->with('success', 'Pergunta atualizada com sucesso!');
     }
 
-    public function create()
-    {
-        return view('questions.create');
-    }
 
     public function destroy($id)
     {
         $question = $this->questionService->getQuestionById($id);
         $question->delete();
-        return redirect()->route('questions.index')->with('success', 'Pergunta deletada com sucesso!');
+        return redirect()->route('questions.cadastradas')->with('success', 'Pergunta deletada com sucesso!');
     }
 
     public function getRandomQuestion($userId)

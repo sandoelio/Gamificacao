@@ -19,7 +19,7 @@ class RankingService
 
         return [
             'labels' => $ranking->pluck('name')->toArray(),
-            'points' => $ranking->pluck('total_points')->toArray()
+            'points' => $ranking->pluck('points')->toArray()
         ];
     }
 

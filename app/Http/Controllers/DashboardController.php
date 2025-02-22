@@ -23,14 +23,12 @@ class DashboardController extends Controller
     public function getRankingData(): JsonResponse
     {
         $data = $this->rankingService->getRankingData();
-       //dd($data);
         return response()->json($data);
     }
 
     public function getUserStats()
     {
         $data = $this->rankingService->getUserStats();
-      // dd($data);
         return response()->json($data);
     }
 }

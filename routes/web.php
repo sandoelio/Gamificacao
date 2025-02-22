@@ -25,13 +25,11 @@ Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function
     Route::get('/user-stats', [DashboardController::class, 'getUserStats'])->name('admin.user');
 
     Route::get('/questions', [QuestionController::class, 'index'])->name('questions.index');
-    Route::get('/questions/create', [QuestionController::class, 'create'])->name('questions.create');
     Route::post('/questions', [QuestionController::class, 'store'])->name('questions.store');
     Route::get('/questions/{id}/edit', [QuestionController::class, 'edit'])->name('questions.edit');
     Route::put('/questions/{id}', [QuestionController::class, 'update'])->name('questions.update');
     Route::delete('/questions/{id}', [QuestionController::class, 'destroy'])->name('questions.destroy');
     Route::get('/questionCadastradas', [QuestionController::class, 'perguntasCadastradas'])->name('questions.cadastradas');
-
 
     Route::get('/report', [ReportController::class, 'index'])->name('report.index');
 });

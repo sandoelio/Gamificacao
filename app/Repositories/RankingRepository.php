@@ -10,14 +10,12 @@ class RankingRepository
 {
     public function getRanking()
     {
-        return User::join('answers', 'users.id', '=', 'answers.user_id')
-            ->join('questions', 'answers.question_id', '=', 'questions.id')
-            ->select('users.name')
-            ->selectRaw('SUM(answers.is_correct * questions.points) as total_points')
-            ->groupBy('users.name')
-            ->orderByDesc('total_points')
+        return User::select('name', 'points')
+            ->where('is_admin', '!=', 1)
+            ->orderByDesc('points')
             ->limit(10)
             ->get();
+
     }
 
     public function getUserRegistrationStats()
