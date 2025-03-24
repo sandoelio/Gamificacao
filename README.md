@@ -102,8 +102,8 @@ O projeto segue o padrão MVC (Model–View–Controller) com camadas adicionais
 
 1️⃣ Clonar o repositório:
 ```bash
-    git clone https://github.com/sandoelio/gamificacao.git
-    cd gamificacao
+    git clone https://github.com/sandoelio/sistema_de_gamificacao.git
+    cd sistema_de_gamificacao
 ```
 
 2️⃣ Instalar as dependências:
